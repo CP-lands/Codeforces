@@ -4,37 +4,32 @@
 #include<math.h>
 #include<algorithm>
 
+//https://codeforces.com/problemset/problem/437/B
 using namespace std;
 
-long long lowbit(int n)
-{
+long long lowbit(int n) {
 	int count = 0;
-	while(n > 0)
-	{
+	while(n > 0) {
 		if(n % 2 == 1)
 			return (long long)pow(2, count);
 		n /= 2;
 		count++;
 	}
 }
-int main()
-{
+int main() {
 	int sum, limit;
 	vector<int> res;
 	int summ = 0;
 	cin>>sum>>limit;
 	vector<vector<int>> v(limit, vector<int>(2));
-	for(int i = 0; i < limit; i++)
-	{
+	for(int i = 0; i < limit; i++) {
 		v[i][0] = lowbit(i + 1);
 		v[i][1] = i + 1;
 	}
 	sort(v.begin(), v.end());
 	int i = v.size() - 1;
-	while(summ < sum && i >= 0)
-	{
-		if(summ + v[i][0] <= sum)
-		{
+	while(summ < sum && i >= 0) {
+		if(summ + v[i][0] <= sum) {
 			summ += v[i][0];
 			res.push_back(v[i][1]);
 		}
@@ -42,8 +37,7 @@ int main()
 			break;
 		i--;
 	}
-	if(summ != sum)
-	{
+	if(summ != sum) {
 		cout<<-1<<endl;
 		return 0;
 	}
