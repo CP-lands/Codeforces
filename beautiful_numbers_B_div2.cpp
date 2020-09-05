@@ -12,13 +12,6 @@ using namespace std;
 typedef long long ll; 
 const int MOD = 1e9 + 7;
  
-char cc[3] = {'a', 'b', 'c'};
- 
-char c(char x, char y){
-	for(int i = 0; i < 3; i++)
-		if(cc[i] != x && cc[i] != y) return cc[i];
-}
- 
 void Anivia_kid(){
 	int n;
 	cin>>n;
