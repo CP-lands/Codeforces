@@ -3,10 +3,10 @@
 #include<map>
 #include<algorithm>
 
+//https://codeforces.com/problemset/problem/650/A
 using namespace std;
 
-int main()
-{
+int main() {
 	int n, i = 0, temp;
 	long long count, less = 0, res = 0;
 	cin>>n;
@@ -17,12 +17,10 @@ int main()
 		cin>>v[i][0]>>v[i][1];
 	sort(v.begin(), v.end());
 	i = 0;
-	while(i < n - 1)
-	{
+	while(i < n - 1) {
 		count = 1;
 		temp = 0;
-		while(i < n - 1 && v[i][0] == v[i + 1][0])
-		{
+		while(i < n - 1 && v[i][0] == v[i + 1][0]) {
 			if(v[i][1] == v[i + 1][1])
 				++mp[v[i + 1][1]];
 			count++;
