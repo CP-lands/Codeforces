@@ -2,10 +2,10 @@
 #include<vector>
 #include<algorithm>
 
+//https://codeforces.com/problemset/problem/650/A
 using namespace std;
 
-int main()
-{
+int main() {
 	int n, temp, i = 0;
 	long long tmp, less, count = 0, ans = 0;
 	cin>>n;
@@ -14,18 +14,15 @@ int main()
 		cin>>res[i][0]>>res[i][1];
 	sort(res.begin(), res.end());
 	i = 0;
-	while(i < n - 1)
-	{
+	while(i < n - 1) {
 		temp = 1;
 		count = 1;
 		tmp = 1;
 		less = 0;
-		while(i < n - 1 && res[i][0] == res[i + 1][0])
-		{
+		while(i < n - 1 && res[i][0] == res[i + 1][0]) {
 			if(res[i][1] == res[i + 1][1])
 				tmp++;
-			else
-			{
+			else {
 				less += ((tmp - 1) * tmp) / 2;
 				tmp = 1;
 			}
@@ -39,19 +36,16 @@ int main()
 			i++;
 	}
 	//------swap_element_each_row----------------
-	for(int i = 0; i < n; i++)
-	{
+	for(int i = 0; i < n; i++) {
 		tmp = res[i][0];
 		res[i][0] = res[i][1];
 		res[i][1] = tmp;
 	}
 	sort(res.begin(), res.end());
 	i = 0;
-	while(i < n - 1)
-	{
+	while(i < n - 1) {
 		count = 1;
-		while(i < n - 1 && res[i][0] == res[i + 1][0])
-		{
+		while(i < n - 1 && res[i][0] == res[i + 1][0]) {
 			count++;
 			i++;
 		}
