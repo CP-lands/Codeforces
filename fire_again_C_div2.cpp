@@ -2,6 +2,7 @@
 //-------did you test n = 1 ?-------//
 #include<bits/stdc++.h>
  
+//https://codeforces.com/problemset/problem/35/C
 using namespace std;
  
 #define fi first
