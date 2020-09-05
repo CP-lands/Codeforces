@@ -1,7 +1,7 @@
 //--------Anivia_kid---------//
 #include<bits/stdc++.h>
  
-//https://codeforces.com/problemset/problem/570/C
+//https://codeforces.com/problemset/problem/136/C?locale=en
 using namespace std;
  
 #define fi first
