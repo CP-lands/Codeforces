@@ -2,6 +2,7 @@
 #include<string.h>
 #include<vector>
 
+//https://codeforces.com/problemset/problem/371/C
 using namespace std;
 
 vector<int> ratio(vector<int> a, int x, int y, int z)
