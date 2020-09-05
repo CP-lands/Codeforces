@@ -1,10 +1,10 @@
 #include<iostream>
 #include <bits/stdc++.h> 
 
+//https://codeforces.com/problemset/problem/515/C
 using namespace std;
 
-int main()
-{
+int main() {
 	int n,tmp;
 	string a;
 	cin>>n>>a;
@@ -15,8 +15,7 @@ int main()
 	M[6] = "53";
 	M[8] = "7222";
 	M[9] = "7332";
-	for(int i = 0; i < n; i++) if (a[i] > '1')
-	{
+	for(int i = 0; i < n; i++) if (a[i] > '1') {
 		tmp = a[i] - '0';
 		if (M.count(tmp))
 			s += M[tmp];
