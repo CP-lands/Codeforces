@@ -1,2 +1,2 @@
 # codeforce
-This is my own codes when taking online contests on codeforces.com
+This is my own codes from taking online contests at codeforces.com
