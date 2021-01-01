@@ -1,14 +1,14 @@
 #include<bits/stdc++.h>  
-
-//https://codeforces.com/problemset/problem/611/C
+ 
+//https://codeforces.com/contest/611/problem/C
 using namespace std; 
-
+ 
 #define pb push_back
 #define fi first
 #define se second
 #define nl '\n'
 typedef long long ll;
-
+ 
 void Solve(){
     int n, m;
     cin>>n>>m;
@@ -42,7 +42,7 @@ void Solve(){
         res += y[r2][c2] - y[r2][c1 - 1] - y[r1][c2] + y[r1][c1 - 1];
         cout<<res<<nl;
     }
-
+ 
 }
 int main(){  
     ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
