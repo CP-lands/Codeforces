@@ -1,78 +1,76 @@
+//--------------my brain isn't at home right now----------------------
 #include<bits/stdc++.h>
-
-//https://codeforces.com/problemset/problem/380/C
+ 
+//https://codeforces.com/contest/380/problem/C
 using namespace std;
-#define N 1000001
-
-int res[4 * N];
+ 
+#define fi first
+#define se second
+#define pb push_back
+#define nl '\n'
+typedef long long ll;
+ 
+const int N = 1e6 + 1;
+int tree[4 * N];
 int l[4 * N];
 int r[4 * N];
+int n;
 string s;
-
-void build(int u, int a, int b){
-    if(a == b){
-        if(s[a] == '('){
-            r[u] = 1;
-            res[u] = 0;
-            l[u] = 0;
-            return;
-        }
-        else{
-            l[u] = 1;
-            res[u] = 0;
-            r[u] = 0;
-            return;
-        }
-    }
-    int mid = a + (b - a) / 2;
-    build(2 * u, a, mid);
-    build(2 * u + 1, mid + 1, b);
-    int k = min(r[2 * u], l[2 * u + 1]);
-    res[u] = res[2 * u] + res[2 * u + 1] + 2 * k;
-    r[u] = r[2 * u] + r[2 * u + 1] - k;
-    l[u] = l[2 * u] + l[2 * u + 1] - k;
-    return;
+ 
+void build(int u, int low, int high){
+	if(low == high){
+		tree[u] = 0;
+		if(s[low] == ')'){
+			r[u] = 1;
+			l[u] = 0;
+		}
+		else{
+			r[u] = 0;
+			l[u] = 1;
+		}
+		return;
+	}
+	int mid = low + (high - low) / 2;
+	build(2 * u, low, mid);
+	build(2 * u + 1, mid + 1, high);
+	tree[u] = tree[2 * u] + tree[2 * u + 1];
+	int newAdded = min(l[2 * u], r[2 * u + 1]);
+	tree[u] += newAdded;
+	l[u] = l[2 * u] - newAdded + l[2 * u + 1];
+	r[u] = r[2 * u + 1] - newAdded + r[2 * u];
 }
-vector<int> getRes(int u, int a, int b, int low, int high){
-    if(a > high || b < low){
-        vector<int> v(3);
-        return v;
-    }
-    if(a >= low && b <= high){
-        vector<int> v(3);
-        v[0] = res[u];
-        v[1] = r[u];
-        v[2] = l[u];
-        return v;
-    }
-    int mid = a + (b - a) / 2;
-    vector<int> v1 = getRes(2 * u, a, mid, low, high);
-    vector<int> v2 = getRes(2 * u + 1, mid + 1, b, low, high);
-    vector<int> v(3);
-    v[0] = v1[0] + v2[0] + min(v1[1], v2[2]) * 2;
-    v[1] = v1[1] + v2[1] - min(v1[1], v2[2]);
-    v[2] = v2[2] + v1[2] - min(v1[1], v2[2]);
-    return v;
+pair<int, pair<int, int>> get(int u, int low, int high, int left, int right){
+	if(left > high || right < low) return {0, {0, 0}};
+	if(low >= left && high <= right){
+		return {tree[u], {l[u], r[u]}};
+	}
+	int mid = low + (high - low) / 2;
+	pair<int, pair<int, int>> p1 = get(2 * u, low, mid, left, right);
+	pair<int, pair<int, int>> p2 = get(2 * u + 1, mid + 1, high, left, right);
+	int newAdded = min(p1.se.fi, p2.se.se);
+	return {p1.fi + p2.fi + newAdded, {p1.se.fi - newAdded + p2.se.fi, p2.se.se - newAdded + p1.se.se}};
 }
-
+ 
 void Solve(){
-    int q;
-    cin>>s>>q;
-    int n = s.size();
-    build(1, 0, n - 1);
-    while(q--){
-        int low, high;
-        cin>>low>>high;
-        low--; high--;
-        vector<int> v = getRes(1, 0, n - 1, low, high);
-        cout<<v[0]<<'\n';
-    }
+	cin>>s;
+	n = s.size();
+	build(1, 0, n - 1);
+	int q;
+	cin>>q;
+	while(q--){
+		int left, right;
+		cin>>left>>right;
+		left--; right--;
+		pair<int, pair<int, int>> p = get(1, 0, n - 1, left, right);
+		cout<<p.fi * 2<<nl;
+	}
+ 
 }
 int main(){
-    ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-    int q = 1;
-    //cin>>q;
-    while(q--){
-        Solve();
-    }
+	ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+	int T = 1;
+	//cin>>T;
+	while(T--){
+		Solve();
+	}
 }
